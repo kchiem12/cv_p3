@@ -35,7 +35,10 @@ def gradient(img):
 ### The input x and y are arrays representing the x and y coordinates of each pixel
 ### Return a boolean array that indicates True for pixels whose distance is less than the threshold
 def check_distance_from_line(x, y, theta, c, thresh):
-    pass
+    func = lambda x: -((x*np.cos(theta) + c)/np.sin(theta))
+    yline = func(x)
+    dist = np.sqrt((x-x)**2 + (y-yline)**2)
+    return dist < thresh
 
 
 ### TODO 5: Write a function to draw a set of lines on the image. The `lines` input is a list of (theta, c) pairs. Each line must appear as red on the final image
