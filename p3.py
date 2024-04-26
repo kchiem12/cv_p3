@@ -53,7 +53,14 @@ def draw_lines(img, lines, thresh):
 ### (b) Its distance from the (theta, c) line is less than thresh2, and
 ### (c) The difference between theta and the pixel's gradient orientation is less than thresh3
 def hough_voting(gradmag, gradori, thetas, cs, thresh1, thresh2, thresh3):
-    pass
+    arr = np.zeros((len(thetas), len(cs)))
+    for i in range(gradmag.shape[0]):
+        for j in range(gradmag.shape[1]):
+            if gradmag[i,j] > thresh1:
+                for k in range(len(thetas)):
+                    for l in range(len(cs)):
+                        if check_distance_from_line(i,j,thetas[k],cs[l],thresh2) and np.abs(gradori[i,j]-thetas[k]) < thresh3:
+                            arr[k,l] += 1
     
 
 ### TODO 7: Find local maxima in the array of votes. A (theta, c) pair counts as a local maxima if (a) its votes are greater than thresh, and 
