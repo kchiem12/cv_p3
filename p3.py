@@ -14,13 +14,10 @@ def imread(filename):
 
 # TODO 2: Create a gaussian filter of size k x k and with standard deviation sigma
 def gaussian_filter(k, sigma):
-    ax = np.arange(-k // 2 + 1, k // 2 + 1)
-    xx, yy = np.meshgrid(ax, ax)
-
-    # Calculate the Gaussian matrix
-    kernel = np.exp(-(xx**2 + yy**2) / (2 * sigma**2))
-    kernel /= np.sum(kernel)  # Normalize the kernel
-    return kernel
+    x, y = np.meshgrid(np.linspace(-k // 2, k // 2, k),
+                    np.linspace(-k // 2, k // 2, k))
+    g = np.exp(-((x**2 + y**2)/(2.0*sigma**2)))
+    return g / g.sum()
 
 # TODO 3: Compute the image gradient.
 # First convert the image to grayscale by using the formula:
